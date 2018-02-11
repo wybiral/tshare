@@ -63,11 +63,11 @@ func Join(a, b []byte) ([]byte, error) {
 
 // When a = s0 and b = s1
 // c = a ^ b
-// m = [c3 c2 c1 c0 0 0 0 0] ^ [0 0 0 0 c7 c6 c5 c4]
+// m = [c3 c2 c1 c0 0 0 0 0] | [0 0 0 0 c7 c6 c5 c4]
 func join01(m, a, b []byte) {
 	for i := 0; i < len(m); i++ {
 		c := a[i] ^ b[i]
-		m[i] = ((c << 4) & 0xf0) ^ ((c >> 4) & 0x0f)
+		m[i] = ((c << 4) & 0xf0) | ((c >> 4) & 0x0f)
 	}
 }
 

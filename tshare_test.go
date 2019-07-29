@@ -1,15 +1,17 @@
-package tshare
+package tshare_test
 
 import (
 	"bytes"
 	"crypto/rand"
 	"testing"
+
+	"github.com/wybiral/tshare"
 )
 
 func TestJoinBytes(t *testing.T) {
 	m := make([]byte, 1024)
 	rand.Read(m)
-	s, err := SplitBytes(m)
+	s, err := tshare.SplitBytes(m)
 	if err != nil {
 		t.Errorf("SplitBytes error: %s", err)
 	}
@@ -22,7 +24,7 @@ func TestJoinBytes(t *testing.T) {
 }
 
 func testJoinBytes(t *testing.T, m, a, b []byte) {
-	m2, err := JoinBytes(a, b)
+	m2, err := tshare.JoinBytes(a, b)
 	if err != nil {
 		t.Errorf("JoinBytes error: %s", err)
 	}

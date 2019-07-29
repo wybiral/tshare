@@ -135,11 +135,11 @@ func read(s0, s1, s2 []byte, r0, r1, r2 io.Reader) (int, error) {
 
 // SplitBytes splits m into 3 shares using 2,3 threshold secret sharing
 // algorithm defined by:
-// m = secret byte with bits [m7 m6 m5 m4 m3 m2 m1 m0]
-// r = random byte
-// s0 = [ 0  0  0  0 m7 m6 m5 m4] ^ r
-// s1 = [m3 m2 m1 m0  0  0  0  0] ^ r
-// s2 = [m7 m6 m5 m4 m3 m2 m1 m0] ^ r
+//   m = secret byte with bits [m7 m6 m5 m4 m3 m2 m1 m0]
+//   r = random byte
+//   s0 = [ 0  0  0  0 m7 m6 m5 m4] ^ r
+//   s1 = [m3 m2 m1 m0  0  0  0  0] ^ r
+//   s2 = [m7 m6 m5 m4 m3 m2 m1 m0] ^ r
 func SplitBytes(m, s0, s1, s2 []byte) error {
 	n := len(m)
 	r := make([]byte, n)
@@ -179,8 +179,8 @@ func JoinBytes(m, s0, s1, s2 []byte) error {
 }
 
 // joinBytes01, when a = s0 and b = s1
-// c = a ^ b
-// m = [c3 c2 c1 c0 0 0 0 0] | [0 0 0 0 c7 c6 c5 c4]
+//   c = a ^ b
+//   m = [c3 c2 c1 c0 0 0 0 0] | [0 0 0 0 c7 c6 c5 c4]
 func joinBytes01(m, a, b []byte) error {
 	if len(a) != len(b) {
 		return errors.New("share sizes must match")
@@ -196,8 +196,8 @@ func joinBytes01(m, a, b []byte) error {
 }
 
 // joinBytes02, when a = s0 and b = s2
-// c = a ^ b
-// m = [0 0 0 0 c7 c6 c5 c4] ^ c
+//   c = a ^ b
+//   m = [0 0 0 0 c7 c6 c5 c4] ^ c
 func joinBytes02(m, a, b []byte) error {
 	if len(a) != len(b) {
 		return errors.New("share sizes must match")
@@ -213,8 +213,8 @@ func joinBytes02(m, a, b []byte) error {
 }
 
 // joinBytes12, when a = s1 and b = s2
-// c = a ^ b
-// m = [c3 c2 c1 c0 0 0 0 0] ^ c
+//   c = a ^ b
+//   m = [c3 c2 c1 c0 0 0 0 0] ^ c
 func joinBytes12(m, a, b []byte) error {
 	if len(a) != len(b) {
 		return errors.New("share sizes must match")
